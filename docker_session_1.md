@@ -1,62 +1,33 @@
-# Docker Workshop Session - 1
+# Docker Workshop Session Notes
 
-1. **Introduction to Containers:**
-    - Definition and concept of containers.
-    - Advantages of containerization over traditional deployment methods.
-2. **Understanding Docker:**
-    - Overview of Docker architecture.
-    - Docker components: Images, Containers, Docker Hub.
-    - Installation and setup of Docker on various platforms.
-3. **Docker vs Virtual Machines (VM):**
-    - Comparison of Docker containers and virtual machines.
-    - Resource efficiency, speed, and scalability differences.
-4. **Docker Workflow:**
-    - Building and managing Docker images.
-    - Containerization of applications.
-    - Pushing and pulling images from Docker Hub.
-5.  **Docker Commands:**
-    - `docker run`, `docker pull`, `docker push`.
-    - Managing containers: `docker ps`, `docker stop`, `docker rm`.
-    - Image manipulation: `docker build`, `docker tag`, `docker rmi`.
-6. **Docker Compose:**
-    - Introduction to Docker Compose for multi-container applications.
-    - Compose files and orchestration of services.
-7. **Docker Networking:**
-    - Understanding Docker network modes.
-    - Linking containers and exposing ports.
-8. **Docker Volumes:**
-    - Managing data persistence with Docker volumes.
-    - Mounting volumes and bind mounts.
-9. **Dockerfile Best Practices:**
-    - Writing efficient Dockerfiles.
-    - Image layering and optimizations.
-10. **Docker Security:**
-    - Container isolation and security best practices.
-    - Docker Content Trust and image verification.
-11. **Container Orchestration (Optional):**
-    - Brief introduction to tools like Kubernetes for container orchestration.
-12. **Troubleshooting and Debugging:**
-    - Identifying and resolving common Docker issues.
-    - Utilizing Docker logs and debugging techniques.
-13. **Continuous Integration/Continuous Deployment (CI/CD) with Docker:**
-    - Integrating Docker into CI/CD pipelines.
-    - Automated testing and deployment strategies.
-14. **Real-world Use Cases:**
-    - Case studies of successful Docker implementations.
-    - Best practices from industry examples.
-15. **Conclusion and Next Steps:**
-    - Recap of key concepts.
-    - Resources for further learning and exploration.
+1. **Introduction to Containers**
+    - What is Docker? and Containerization?
+    - Containerization Concept
+    - Difference(VM vs Containers)
+    - Advantages and Disadvantages
+2. **Installation**
+3. **Docker Architecture**
+4. **Docker Workflow**
+5. **Docker Commands**
+6. **Dockerfile**
+    - Dockerfile Instructions
+    - Docker Image
+7. **Hands-On Examples(Creating and Containerizing)**
+    - Challanges, 
+8. **Docker Compose Concept**
+9. **Important Docker Commands**
+9. **Docker Volumes**
 
-## What is Docker?
+## 1. Introduction
+### What is Docker?
 
-Docker is a **Containerization** platform for packaging, deploying, and running applications as **CONTAINERS.**
+Docker is a **Containerization** platform for packaging, deploying, and running applications as **CONTAINERS**.
 
 ![DockerContainer.png](./static/images/DockerContainer.png)
 
-## What is containerization? 📦
+### What is containerization? 📦
 
-C**ontainerization** is a lightweight form of virtualization that allows you to encapsulate an application and its dependencies into a self-contained unit called a "container." 
+**Containerization** is a lightweight form of virtualization that allows you to encapsulate an application and its dependencies into a self-contained unit called a "container." 
 ****
 
 Docker applications run in **containers** that can be used on any system: a developer’s laptop, systems on premises, or in the cloud. (it runs the same)
@@ -65,14 +36,15 @@ Docker applications run in **containers** that can be used on any system: a deve
 
 Containers share the host operating system's kernel, but they have their own isolated file system, processes, and networking.
 
-## Difference between VMs & Containers
+### Difference between VMs & Containers
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d9ca30ca-208b-4816-a944-c51009149860/e16956b7-872c-4fec-aefa-6e14044ab758/Untitled.png)
+![VMvsContainer](./static/images/vmvscontainer.png)
 
 ![virtualbox-main.png](./static/images/virtualbox-main.png)
 
 | Aspect | Containers | Virtual Machines |
 | --- | --- | --- |
+| **OS** | Shares host's Kernel | Has its own Kernel |
 | **Resource Usage** | Lightweight, efficient | Heavier, more resource usage |
 | **Startup Time** | Quick start | Slower start |
 | **Isolation** | Process-level separation | Full OS isolation |
@@ -93,24 +65,33 @@ However, a Linux runtime is required for Docker. Implementations on non-Linux pl
 
 </aside>
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d9ca30ca-208b-4816-a944-c51009149860/a979eda6-13c8-450b-aed5-063c3cf48aff/Untitled.png)
-
+### Advantages of Containerization
+- Increased **Portability**
+- Easier **Scalability**
+- Easy and Fast **Deployments**
+- Better **Productivity**
+- Improved **Security**
 - Consistent test environment for development and QA.
 - Cross-platform packages called images.
 - Isolation and encapsulation of application dependencies.
 - Ability to scale efficiently, easily, and in real time.
 - Enhances efficiency via easy reuse of images.
 
-Disadvantage
-Compatibility issue: Windows container won’t run on Linux machines and vice versa
+### Disadvantage
+- Compatibility issue: *Windows container won’t run on Linux machines and vice-versa*
 
-### Installation:
+#### Other disadvantages(*Discovered by me*)😎
+- Counter-productivity or efficiency-draining issue: *Hard to turn a 5-minute task to a 5-hour task*
+- Troubleshooting issue: *It will be hard, to be able to find tons of dependency issues*
+
+
+## 2. Installation 
 
 [Get Docker](https://docs.docker.com/get-docker/)
 
-### Docker Architecture
+## 3. Docker Architecture
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d9ca30ca-208b-4816-a944-c51009149860/c381a8a1-c05a-4ee8-829c-ee3c713b807b/Untitled.png)
+![Untitled](./static/images/dockerarchitecture.png)
 
 Docker uses a client-server architecture to manage and run containers:
 
@@ -134,17 +115,17 @@ Here's a high-level overview of the interaction between these components:
 - Docker images are fetched or built from the Docker registry.
 - Containers are created, started, stopped, and managed by the Docker daemon.
 
-## Docker Workflow
+### 4. Docker Workflow
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d9ca30ca-208b-4816-a944-c51009149860/97c98574-bd58-4ca7-9944-d2166d4402d1/Untitled.png)
+![Untitled](./static/images/dockerworkflow.gif)
 
-#### More on Docker? - **NOOOOO!!!!!**
+#### More on Docker? - **Ufffffffff!!!!!**
+![Boring](./static/images/uffsmrbean.gif)
 
-#### Time for a Project? - **YEAHHHHH!!!!!**
 
 ---
 
-## Docker Commands
+### 5. Docker Commands
 
 1. **Image Commands:**
     - **docker pull**: Pull an image from a registry.
@@ -227,64 +208,73 @@ Here's a high-level overview of the interaction between these components:
 
 Remember to exercise caution when using commands that remove resources, as they can result in data loss. Always double-check the resources you are about to remove.
 
-## Dockerfile Instructions
+## 6. Dockerfile
+### Dockerfile Instructions
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d9ca30ca-208b-4816-a944-c51009149860/137cea17-4227-42c1-bb87-44cac3adee60/Untitled.png)
+[Dockerfile Instructions](https://docs.docker.com/reference/dockerfile/)
 
-## Docker Image
+#### Docker Image
 
 A Docker image is a read-only template containing a set of instructions for creating a container that can run on the Docker platform. Docker images are also the starting point for anyone using Docker for the first time.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/d9ca30ca-208b-4816-a944-c51009149860/d9ddfdc8-31c1-4f05-83ec-826a926a61ca/Untitled.png)
+![Untitled](./static/images/dockerimageprocess.gif)
 
-Challenges
-Run a container with the `nginx:1.14-alpine` image and name it `webapp`
+#### Time for Hands-On? - **YEAHHHHH!!!!!**
+![Wow](./static/images/wowmrbean.gif)
 
-docker run -p 5000:80 —name webapp -d `nginx:1.14-alpine` 
+## 7. Hands-On Practice
 
-Challenge 2
+**Challenge 1**
 
-Containerize Python application and push the image to DockerHub
+*Run a container with the `nginx:1.14-alpine` image and name it `webapp`.*
 
-Step 1- Create Python app
+```bash
+docker run -p 4000:80 --name webapp -d nginx:1.14-alpine
+```
 
-Step 2 - Write Dockerfile for the app
+**Challenge 2**
 
-Step 3 - Create image for the app
+*Containerize Python application and push the image to Dockerhub.*
 
-Step 4 - Run the container for the app 
+**Step 1** - Create Python/NodeJS app. (Clone from GitHub) =>[Python](https://github.com/sbmagar/luckydrawapp-python) OR [NodeJS](https://github.com/sbmagar/luckydrawapp-nodejs)
 
-Step 5 - If it works push the image on Dockerhub
+**Step 2** - Write Dockerfile for the app
 
-ENV variables
+**Step 3** - Create image for the app
+
+**Step 4** - Run the container for the app 
+
+**Step 5** - If it works push the image on Dockerhub (optional)
+
+#### ENV variables
 
 - **Purpose**: Environment variables in Docker are used to configure applications, control runtime behavior, and manage sensitive information.
 - **Configuration**: They replace hardcoded values in configuration files, enabling flexibility across different environments.
 - **Dynamic Behavior**: Environment variables can control feature toggles, logging levels, and runtime environments.
 - **Secrets Management**: Sensitive data like passwords or API keys can be securely injected into containers using environment variables.
 - **Setting Variables**:
-    - TESJ
     - Use `ENV` instruction in Dockerfile to set variables during image build.
-    - Pass variables with `e` or `-env` flag in `docker run` command.
+    - Pass variables with `-e` or `--env` flag in `docker run` command.
     - Define them in `docker-compose.yml` under the `environment` key.
     - In Docker Swarm, set them with `docker service create/update` or in a Docker Compose file for Swarm.
-- **Flexibility and Portability**: Environment variables make Dockerized applications easier to manage and deploy across diverse environments.
+- **Flexibility and Portability**: Environment variables make Dockerized applications easier to manage and deploy across multiple environments.
 
-### Challenge
+**Challenge 3**
 
-Run a container named `sagar-is-the-best-app` using image `sbmagar/blogging-app` and set the environment variable `APP_COLOR` to `blue`. Make the application available on port `75666` on the host. The application listens on port `5000`.
+*Run a container named `shrawan-app` using image `sbmagar/bloggingapp` and set the environment variable `APP_COLOR` to `green`. Make the application available on port `75666` on the host. The application listens on port `5000`.*
 
-- Solution
-    ```
-    docker run -d \
-    --name blue-app \
-    -p 38282:8080 \
-    -e APP_COLOR=blue \
-    kodekloud/simple-webapp
-    ```
-    
+- Solution:
+```
+docker run -d \
+--name shrawan-app \
+-p 75666:5000 \
+-e APP_COLOR=green \
+sbmagar/bloggingapp
+```
 
-## Commands & Arguments
+
+#### Commands & Arguments
+
 
 <aside>
 💡 Always remember that a container does not host an operating system; instead, it runs a process and will be terminated once the process is completed.
@@ -299,9 +289,11 @@ FROM alpine:latest
 CMD ["sleep", "3600"]
 ```
 
-**`CMD ["sleep", "3600"]`** ✅   **`CMD ["sleep 3600"]`** ❌
+**`CMD ["sleep", "3600"]`** ✅   
+**`CMD ["sleep 3600"]`** ❌
 
 it's recommended to use the first form (**`CMD ["sleep", "3600"]`**) to specify the command and its arguments as separate elements in a JSON array for clarity and to ensure proper execution.
+
 
 ENTRYPOINT
 
@@ -354,7 +346,7 @@ When using the `--link` option in Docker:
         FROM mcr.microsoft.com/dotnet/core/runtime:latest
         WORKDIR /app 
         COPY ./app .
-        ENTRYPOINT ["dotnet", "YourApp.dll"]
+        ENTRYPOINT ["dotnet", "sampleapp.dll"]
         ```
         
     - **Run .NET Core Application Container Linked to MySQL**: Now, run the .NET Core application container, linking it to the MySQL container:
@@ -366,11 +358,11 @@ When using the `--link` option in Docker:
     
     In this example:
     
-    - `-name mysql-container` assigns the name `mysql-container` to the MySQL container.
-    - `e MYSQL_ROOT_PASSWORD=password` sets the root password for MySQL.
+    - `--name mysql-container` assigns the name `mysql-container` to the MySQL container.
+    - `-e MYSQL_ROOT_PASSWORD=password` sets the root password for MySQL.
     - `-name dotnet-app` assigns the name `dotnet-app` to the .NET Core application container.
-    - `-link mysql-container:mysql` links the .NET Core application container to the MySQL container with an alias `mysql`.
-    - `d` runs both containers in detached mode.
+    - `--link mysql-container:mysql` links the .NET Core application container to the MySQL container with an alias `mysql`.
+    - `-d` runs both containers in detached mode.
     
     Inside the .NET Core application container, you can now access the MySQL database using the hostname `mysql` and the exposed port. Make sure your .NET Core application is configured to connect to MySQL using the correct hostname and port.
     
@@ -380,42 +372,46 @@ When using the `--link` option in Docker:
 
 </aside>
 
-Docker Compose
+So what then?
 
-configuration file to run multiple containers in one command
+## 8. Docker Compose
 
-—links
+A configuration file to run multiple containers in one command
 
-1  docker run --name redis redis:alpine
-2  docker run --name redis -d redis:alpine
-3  docker rm redis
-4  docker run --name redis -d redis:alpine
-5  docker run --name clickcounter --link redis:redis -p 8085:5000 kodekloud/click-counter
-6  docker rm clickcounter
-7  docker run --name clickcounter --link redis:redis -d -p 8085:5000 kodekloud/click-counter
+--links
 
+- 1  docker run --name redis redis:alpine ⚠️
+- 2  docker run --name redis -d redis:alpine ⚠️
+- 3  docker rm redis ⚠️
+- 4  docker run --name redis -d redis:alpine ⚠️
+- 5  docker run --name luckydrawapp --link redis:redis -p 5000:5000 luckydraw-app:latest ✅✅
+- 6  docker rm luckydrawapp ⚠️
+- 7  docker run --name luckydrawapp --link redis:redis -d -p 5000:5000 luckydraw-app:latest ✅✅
+
+```
+version: '3.8'
 services:
-redis:
-image: redis:alpine
-clickcounter:
-image: kodekloud/click-counter
-ports:
-- 8085:5000
-version: '3.0'
+  redis:
+    image: redis:alpine
+  luckydrawapp:
+    image: luckydraw-app:latest
+    ports:
+      - 5000:5000
+```
 
 ---
 
-### Docker Volumes:
+### 9. Docker Volumes:
 
 Docker volumes are a way to persist data generated by and used by Docker containers. They provide a mechanism for sharing data between a host machine and Docker containers or between containers themselves.
 
-### Types of Volumes:
+#### Types of Volumes:
 
 1. **Named Volumes:** Managed by Docker, easier to use and manage.
 2. **Host Volumes:** Maps a directory from the host machine into the container.
 3. **Anonymous Volumes:** Similar to named volumes but managed by Docker with a randomly generated name.
 
-### Commands:
+#### Commands:
 
 1. **Create a named volume:**
     
@@ -454,7 +450,7 @@ Docker volumes are a way to persist data generated by and used by Docker contain
     ```
     
 
-### Dockerfile Example:
+#### Dockerfile Example:
 
 ```
 # Define a volume
@@ -467,7 +463,7 @@ WORKDIR /data
 COPY . /data
 ```
 
-### Docker Compose Example:
+#### Docker Compose Example:
 
 ```yaml
 version: '3.8'
@@ -483,7 +479,7 @@ volumes:
     external: true
 ```
 
-### Key Points:
+#### Lastly, points to remember:
 
 - Volumes are useful for persisting data even if containers are removed.
 - They can be shared between containers.
@@ -491,7 +487,7 @@ volumes:
 
 ---
 
-These notes should give you a good understanding of Docker volumes along with practical examples and commands to work with them. Let me know if you need further clarification on any point!
+https://docs.docker.com/guides/
 
 https://docs.docker.com/compose/
 

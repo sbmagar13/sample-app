@@ -2,8 +2,11 @@ from flask import Flask, render_template, jsonify, request
 import markdown2
 from bs4 import BeautifulSoup
 import requests
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
+load_dotenv()
 
 def get_url_preview(url):
     try:
@@ -37,13 +40,15 @@ def embed_url_preview(markdown_content):
 
 @app.route('/')
 def index():
+    # app_color = os.getenv('APP_COLOR', 'white')
+    app_color = os.getenv('APP_COLOR', '#f8f9fa')
     markdown_file = "docker_session_1.md"
     with open(markdown_file, 'r') as file:
         markdown_content = file.read()
     
     html_content = embed_url_preview(markdown_content)
     
-    html_content = markdown2.markdown(html_content, extras=["tables", "code-friendly", "fenced-code-blocks", "metadata", "latex", "footnotes", "smarty-pants", "strike", "tag-friendly", "xml"])
+    html_content = markdown2.markdown(html_content, extras=["tables", "fenced-code-blocks"])
 
     # soup = BeautifulSoup(html_content, 'html.parser')
     # tables = soup.find_all('table')
@@ -51,7 +56,7 @@ def index():
     # html_content = "\n".join(formatted_tables)
     
     # Render the HTML content
-    return render_template('index.html', content=html_content)
+    return render_template('index.html', content=html_content, app_color=app_color)
 
 @app.route('/preview')
 def preview():
