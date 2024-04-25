@@ -9,18 +9,14 @@
         {{ content | safe }}
     </div>
 
-    <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- JavaScript to fetch and embed URL previews -->
     <script>
         $(document).ready(function() {
-            // Function to fetch URL preview data
             function getURLPreview(url) {
                 return $.get('/preview?url=' + encodeURIComponent(url));
             }
 
-            // Function to embed URL previews into Markdown content
             function embedURLPreviews() {
                 $('.markdown-content a').each(function() {
                     var $link = $(this);
@@ -39,12 +35,10 @@
                 });
             }
 
-            // Embed URL previews when the page is loaded
             embedURLPreviews();
         });
     </script>
 
-    <!-- JavaScript to add copy buttons to code blocks in Markdown content -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.markdown-content pre code').forEach(codeBlock => {
