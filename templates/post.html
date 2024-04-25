@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.title }}</title>
+    <style>
+        /* Styles for the toggle list */
+.toggle-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.toggle-list-item {
+    margin-bottom: 10px;
+}
+
+.toggle-list-item .toggle-list-content {
+    display: none;
+    margin-left: 20px;
+}
+
+.toggle-list-item.active .toggle-list-content {
+    display: block;
+}
+
+.toggle-list-item h3 {
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.toggle-list-item pre {
+    margin-bottom: 5px;
+}
+
+    </style>
+</head>
+<body>
+    {{ html_content }}
+    <script>
+        // Add click event listeners to toggle list items
+        document.querySelectorAll('.toggle-list-item').forEach(item => {
+            const title = item.querySelector('h3');
+            title.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+    </script>
+    
+</body>
+</html>
