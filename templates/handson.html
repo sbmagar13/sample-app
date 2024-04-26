@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Workshop Session - 1 Docker Notes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-color: {{ app_color }};
+        }
+    </style>
+</head>
+<body>
+    <div class="markdown-content">
+        {{ content | safe }}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            function getURLPreview(url) {
+                return $.get('/preview?url=' + encodeURIComponent(url));
+            }
+
+            function embedURLPreviews() {
+                $('.markdown-content a').each(function() {
+                    var $link = $(this);
+                    var url = $link.attr('href');
+                    getURLPreview(url).then(function(data) {
+                        var $preview = $('<div class="link-preview">');
+                        $preview.append('<h2>' + data.title + '</h2>');
+                        $preview.append('<p>' + data.description + '</p>');
+                        $preview.append('<img src="' + data.image + '">');
+                        // Create an anchor tag with the URL as href and append the preview content inside it
+                        var $previewLink = $('<a>').attr('href', url).append($preview); 
+                        $link.after($previewLink);
+                    }).fail(function() {
+                        console.error('Failed to fetch URL preview for:', url);
+                    });
+                });
+            }
+
+            embedURLPreviews();
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.markdown-content pre code').forEach(codeBlock => {
+                const copyButton = document.createElement('button');
+                copyButton.className = 'copy-button';
+                copyButton.textContent = 'Copy';
+                codeBlock.parentNode.insertBefore(copyButton, codeBlock);
+
+                copyButton.addEventListener('click', () => {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = codeBlock.innerText;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                });
+            });
+        });
+    </script>
+    <script>
+        document.querySelectorAll('.toggle-list-item').forEach(item => {
+            const title = item.querySelector('h3');
+            title.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+    <div>
+        <a href="/">Back</a>
+    </div>
+</body>
+</html>

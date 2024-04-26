@@ -13,7 +13,7 @@
     - Dockerfile Instructions
     - Docker Image
 7. **Hands-On Examples(Creating and Containerizing)**
-    - Challanges, 
+    - Challanges
 8. **Docker Compose Concept**
 9. **Important Docker Commands**
 9. **Docker Volumes**
@@ -122,7 +122,6 @@ Here's a high-level overview of the interaction between these components:
 #### More on Docker? - **Ufffffffff!!!!!**
 ![Boring](./static/images/uffsmrbean.gif)
 
-
 ---
 
 ### 5. Docker Commands
@@ -223,16 +222,20 @@ A Docker image is a read-only template containing a set of instructions for crea
 ![Wow](./static/images/wowmrbean.gif)
 
 ## 7. Hands-On Practice
+### **Prerequisites**:
+Make sure following prerequisites are met before you start:
+    - Docker installed on your machine
+    - Docker Compose installed on your machine
+    - Docker Hub account
 
-**Challenge 1**
+OR 
+[Play With Docker](https://labs.play-with-docker.com/)
+
+**Task 1**
 
 *Run a container with the `nginx:1.14-alpine` image and name it `webapp`.*
 
-```bash
-docker run -p 4000:80 --name webapp -d nginx:1.14-alpine
-```
-
-**Challenge 2**
+**Task 2**
 
 *Containerize Python application and push the image to Dockerhub.*
 
@@ -259,18 +262,11 @@ docker run -p 4000:80 --name webapp -d nginx:1.14-alpine
     - In Docker Swarm, set them with `docker service create/update` or in a Docker Compose file for Swarm.
 - **Flexibility and Portability**: Environment variables make Dockerized applications easier to manage and deploy across multiple environments.
 
-**Challenge 3**
+**Task 3**
 
 *Run a container named `shrawan-app` using image `sbmagar/bloggingapp` and set the environment variable `APP_COLOR` to `green`. Make the application available on port `75666` on the host. The application listens on port `5000`.*
 
-- Solution:
-```
-docker run -d \
---name shrawan-app \
--p 75666:5000 \
--e APP_COLOR=green \
-sbmagar/bloggingapp
-```
+[Solutions](http://localhost:5000/solutions)
 
 
 #### Commands & Arguments
@@ -318,7 +314,7 @@ Explanation:
 Override arguments
 
 ```docker
-docker run my_image **1800**   # Sleeps for 1800 seconds (30 minutes)
+docker run my_image 1800   # Sleeps for 1800 seconds (30 minutes)
 ```
 
 Communication Between containers.
@@ -486,6 +482,11 @@ volumes:
 - Docker volumes are stored in a part of the host filesystem which is managed by Docker.
 
 ---
+
+Sourcecode for this site can be found here: https://github.com/sbmagar/sample-app
+
+References:
+[Play With Docker](https://labs.play-with-docker.com/)
 
 https://docs.docker.com/guides/
 

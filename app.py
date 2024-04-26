@@ -58,6 +58,37 @@ def index():
     # Render the HTML content
     return render_template('index.html', content=html_content, app_color=app_color)
 
+@app.route('/solutions')
+def solutions():
+    # app_color = os.getenv('APP_COLOR', 'white')
+    app_color = os.getenv('APP_COLOR', '#f8f9fa')
+    markdown_file = "solutions.md"
+    with open(markdown_file, 'r') as file:
+        markdown_content = file.read()
+    
+    html_content = embed_url_preview(markdown_content)
+    
+    html_content = markdown2.markdown(html_content, extras=["tables", "fenced-code-blocks"])
+
+    # Render the HTML content
+    return render_template('solutions.html', content=html_content, app_color=app_color)
+
+@app.route('/handson')
+def handson():
+    # app_color = os.getenv('APP_COLOR', 'white')
+    app_color = os.getenv('APP_COLOR', '#f8f9fa')
+    markdown_file = "handson.md"
+    with open(markdown_file, 'r') as file:
+        markdown_content = file.read()
+    
+    html_content = embed_url_preview(markdown_content)
+    
+    html_content = markdown2.markdown(html_content, extras=["tables", "fenced-code-blocks"])
+
+    # Render the HTML content
+    return render_template('handson.html', content=html_content, app_color=app_color)
+
+
 @app.route('/preview')
 def preview():
     url = request.args.get('url')
