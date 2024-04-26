@@ -38,7 +38,7 @@ Containers share the host operating system's kernel, but they have their own iso
 
 ### Difference between VMs & Containers
 
-![VMvsContainer](./static/images/vmvscontainer.png)
+![VMvsContainer](./static/images/VMvsContainer.png)
 
 ![virtualbox-main.png](./static/images/virtualbox-main.png)
 
